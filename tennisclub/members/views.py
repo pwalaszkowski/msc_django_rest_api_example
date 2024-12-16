@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
-from .models import ClubMember
+from .models import Member
 
 
 def main(request):
@@ -8,9 +8,9 @@ def main(request):
   return HttpResponse(template.render())
 
 
-def clubmembers(request):
-  members = ClubMember.objects.all().values()
-  template = loader.get_template('clubmembers.html')
+def member(request):
+  members = Member.objects.all().values()
+  template = loader.get_template('members.html')
   context = {
     'members': members,
   }
@@ -18,8 +18,8 @@ def clubmembers(request):
 
 
 def details(request, id):
-  members = ClubMember.objects.get(id=id)
-  template = loader.get_template('memberdetails.html')
+  members = Member.objects.get(id=id)
+  template = loader.get_template('details.html')
   context = {
     'members': members,
   }
