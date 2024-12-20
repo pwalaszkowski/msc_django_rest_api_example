@@ -52,6 +52,24 @@ def create_member(request):
     return render(request, 'create_member.html', {'form': form})
 
 
+def select_member_to_edit(request):
+    members = Member.objects.all()  # # Get all members
+    return render(request, 'select_member_to_edit.html', {'members': members})
+
+
+def edit_member(request, id):
+    member = get_object_or_404(Member, id=id)  # Get user or return 404 in case member do not exist
+    if request.method == 'POST':
+        form = MemberForm(request.POST, instance=member)  # Link Form with user
+        if form.is_valid():
+            form.save()  # Save to DB
+            return redirect('select_member_to_edit')  # Return back to select member to edit page
+    else:
+        form = MemberForm(instance=member)  # Display form with member data
+
+    return render(request, 'edit_member.html', {'form': form, 'member': member})
+
+
 def delete_members(request):
     if request.method == 'POST':
         # Get the selected members for deletion
@@ -59,6 +77,6 @@ def delete_members(request):
         Member.objects.filter(id__in=member_ids).delete()  # Delete Members
         return redirect('members')  # Redirect to members site
 
-    # Przy pierwszym wejściu wyświetl listę członków
+    # At first visit, display the members list
     members = Member.objects.all()
     return render(request, 'delete_members.html', {'members': members})

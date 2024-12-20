@@ -1,0 +1,19 @@
+{% extends "master.html" %}
+
+{% block title %}
+  My Tennis Club - List of all members
+{% endblock %}
+
+{% block content %}
+<h1>Edit Member: {{ member.firstname }} {{ member.lastname }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save Changes</button>
+</form>
+
+<p>Back to <a href="/select_member_to_edit">Select Member to Edit</a></p>
+<p>Back to <a href="/members">Members</a></p>
+<p>Back to <a href="/">Main Page</a></p>
+
+{% endblock %}

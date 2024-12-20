@@ -1,0 +1,35 @@
+{% extends "master.html" %}
+
+{% block title %}
+  My Tennis Club - List of all members
+{% endblock %}
+
+{% block content %}
+<h1>Select a Member to Edit</h1>
+<table>
+  <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+  </tr>
+  {% for member in members %}
+  <tr>
+      <td>{{ member.firstname }}</td>
+      <td>{{ member.lastname }}</td>
+      <td>{{ member.email }}</td>
+      <td>
+          <a href="{% url 'edit_member' member.id %}">Edit</a>
+      </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<p>Back to <a href="/members">Members</a></p>
+<p>Back to <a href="/">Main Page</a></p>
+{% endblock %}
+
+
+
+
+
