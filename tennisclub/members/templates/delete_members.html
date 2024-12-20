@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<h2>Delete Members</h2>
+<h2>Delete Members - Select Member or Members to Delete</h2>
 
 <form method="post">
     {% csrf_token %}
@@ -20,9 +20,9 @@
         <tbody>
             {% for member in members %}
             <tr>
-                <td><input type="checkbox" name="members" value="{{ member.id }}"></td>
                 <td>{{ member.firstname }}</td>
                 <td>{{ member.lastname }}</td>
+                <td><input type="checkbox" name="members" value="{{ member.id }}"></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -31,4 +31,7 @@
         Delete Selected Members
     </button>
 </form>
+<p>Back to <a href="/members">Members</a></p>
+<p>Back to <a href="/">Main Page</a></p>
+
 {% endblock %}
